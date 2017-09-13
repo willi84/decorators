@@ -2,6 +2,23 @@
 
 This repo shows samples and structurs of decorators in typescript.
 
+## Basics
+decorators are still in TS experimentell, so you need do allow them.
+
+**Command Line:**
+```ts
+tsc --target ES5 --experimentalDecorators
+```
+**tsconfig.json**
+```ts
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "experimentalDecorators": true
+    }
+}
+```
+
 
 
 
