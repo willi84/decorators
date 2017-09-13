@@ -54,6 +54,8 @@ export class Tabs {
 ?
 
 ## Decorator
+Decorators are a proposed standard for ECMAScript 7 by Yehuda Katz, to annotate and modify classes and properties at design time.Looks the same like AtScripts annotation but **we** are in charge of what our decorator does to our code.
+
 
 ## figures
 ![ ](https://svbtleusercontent.com/pxffvvbj2iho8w_small.jpg)
