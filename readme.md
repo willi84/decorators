@@ -19,7 +19,19 @@ tsc --target ES5 --experimentalDecorators
 }
 ```
 
+## Annotations
+introduced by AtScript
+* Type Annotations
+* Field Annotations
+* MetaData Annotations
 
+### type annotation
+```ts
+var num: number = 123;
+function identity(num: number): number {
+    return num;
+}
+```
 
 
 ## sources
@@ -32,3 +44,4 @@ tsc --target ES5 --experimentalDecorators
 * https://www.typescriptlang.org/docs/handbook/decorators.html
 * https://gist.github.com/remojansen/16c661a7afd68e22ac6e
 * https://www.typescriptlang.org/play/
+* https://basarat.gitbooks.io/typescript/docs/types/type-system.html
