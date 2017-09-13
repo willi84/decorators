@@ -39,6 +39,8 @@ function identity(num: number): number {
 
 ### metadata annotation
 ```ts
+import { ComponentMetadata as Component } from '@angular/core';
+
 @Component({
   selector: 'tabs',
   template: `<div>foobar</div>`
