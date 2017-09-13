@@ -72,3 +72,7 @@ Decorators are a proposed standard for ECMAScript 7 by Yehuda Katz, to annotate 
 * https://www.typescriptlang.org/play/
 * https://basarat.gitbooks.io/typescript/docs/types/type-system.html
 * https://stackoverflow.com/questions/37317705/what-is-the-difference-between-annotation-and-decorator
+* https://spin.atomicobject.com/2017/04/24/typescript-modular-typesafe-metadata/
+* http://blog.wolksoftware.com/decorators-metadata-reflection-in-typescript-from-novice-to-expert-part-4
+* https://www.npmjs.com/package/reflect-annotations
+* https://stackoverflow.com/questions/38085883/how-to-create-a-simple-typescript-metadata-annotation
