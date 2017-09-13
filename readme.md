@@ -136,9 +136,11 @@ function ClassDecorator(
 class ClassDecoratorExample {
 }
 ```
+Output
+```
     ClassDecorator called on:  function ClassDecoratorExample() {
      }
-[[playground][1]]
+```
 
 With parameters:
 ```ts
@@ -155,11 +157,13 @@ function ClassDecoratorParams(param1: number, param2: string) {
 class ClassDecoratorParamsExample {
 }
 ```
+Output
+```
     ClassDecoratorParams(2, 'b') called on:  function ClassDecoratorParamsExample() {
      }
     ClassDecoratorParams(1, 'a') called on:  function ClassDecoratorParamsExample() {
      }
-[[playground][2]]
+```
 
 
 ### Property Decorator
@@ -178,8 +182,10 @@ class PropertyDecoratorExample {
     name: string;
 }
 ```
+Output
+```
     PropertyDecorator called on:  {} name
-[[playground][3]]
+```
 
 
 ### Method Decorator
@@ -198,11 +204,13 @@ class MethodDecoratorExample {
     }
 }
 ```
+Output
+```
     MethodDecorator called on:  { method: [Function] } method { value: [Function],
       writable: true,
       enumerable: true,
       configurable: true }
-[[playground][4]]
+```
 
 
 Restrict to a certain function signature:
@@ -222,11 +230,13 @@ class TypeRestrictedMethodDecoratorExample {
     }
 }
 ```
+Output
+```
     TypeRestrictedMethodDecorator called on:  { method: [Function] } method { value: [Function],
       writable: true,
       enumerable: true,
       configurable: true }
-[[playground][5]]
+```
 
 
 ### Static Method Decorator
@@ -245,9 +255,11 @@ class StaticMethodDecoratorExample {
     }
 }
 ```
+Output
+```
     StaticMethodDecorator called on:  function StaticMethodDecoratorExample() {
       }
-[[playground][6]]
+```
 
 
 ### Parameter Decorator
@@ -265,9 +277,11 @@ class ParameterDecoratorExample {
     }
 }
 ```
+Output
+```
     ParameterDecorator called on:  { method: [Function] } method 1
     ParameterDecorator called on:  { method: [Function] } method 0
-[[playground][7]]
+```
 
 
 
