@@ -24,7 +24,7 @@ A decorator corresponds to a function that is called on the class whereas annota
 With TypeScript and ES7, @Something is a decorator. In the context of Angular2, decorators like @Component, @Injectable, ... define metadata for the decorated element using the Reflect.defineMetadata method.
 
 ## Annotations
-introduced by AtScript. It adds automatically  some boilerplate code to the class, function or property its attached to.
+Annotations was an proposed by the Google AtScript team but annotations are not a standard. It adds automatically  some boilerplate code to the class, function or property its attached to.
 * Type Annotations
 * Field Annotations
 * MetaData Annotations
@@ -54,6 +54,9 @@ export class Tabs {
 ?
 
 ## Decorator
+
+## figures
+![ ](https://svbtleusercontent.com/pxffvvbj2iho8w_small.jpg)
 
 ## sources
 
