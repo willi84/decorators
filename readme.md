@@ -56,6 +56,63 @@ export class Tabs {
 ## Decorator
 Decorators are a proposed standard for ECMAScript 7 by Yehuda Katz, to annotate and modify classes and properties at design time.Looks the same like AtScripts annotation but **we** are in charge of what our decorator does to our code.
 
+A decorator is:
+
+* an expression
+* that evaluates to a function
+* that takes the target, name, and decorator descriptor as arguments
+* and optionally returns a decorator descriptor to install on the target object
+
+Consider a simple class definition:
+
+```js
+class Person {
+  name() { return `${this.first} ${this.last}` }
+}
+```
+
+Evaluating this class results in installing the `name` function onto
+`Person.prototype`, roughly like this:
+
+```js
+Object.defineProperty(Person.prototype, 'name', {
+  value: specifiedFunction,
+  enumerable: false,
+  configurable: true,
+  writable: true
+});
+```
+
+A decorator precedes the syntax that defines a property:
+
+```js
+class Person {
+  @readonly
+  name() { return `${this.first} ${this.last}` }
+}
+```
+
+Now, before installing the descriptor onto `Person.prototype`, the engine first
+invokes the decorator:
+
+```js
+let description = {
+  type: 'method',
+  initializer: () => specifiedFunction,
+  enumerable: false,
+  configurable: true,
+  writable: true
+};
+
+description = readonly(Person.prototype, 'name', description) || description;
+defineDecoratedProperty(Person.prototype, 'name', description);
+
+function defineDecoratedProperty(target, { initializer, enumerable, configurable, writable }) {
+  Object.defineProperty(target, { value: initializer(), enumerable, configurable, writable });
+}
+```
+
+The has an opportunity to intercede before the relevant `defineProperty` actually occurs.
 
 ## figures
 ![ ](https://svbtleusercontent.com/pxffvvbj2iho8w_small.jpg)
