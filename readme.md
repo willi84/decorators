@@ -1,6 +1,6 @@
 # Decorators
 
-This repo shows samples and structurs of decorators in typescript.
+This repo shows samples and structurs of decorators in typescript. Its a mixup of different sources
 
 ## Basics
 decorators are still in TS experimentell, so you need do allow them.
@@ -114,6 +114,163 @@ function defineDecoratedProperty(target, { initializer, enumerable, configurable
 
 The has an opportunity to intercede before the relevant `defineProperty` actually occurs.
 
+- [Class Decorator](#class-decorator)
+- [Property Decorator](#property-decorator)
+- [Method Decorator](#method-decorator)
+- [Static Method Decorator](#static-method-decorator)
+- [Parameter Decorator](#parameter-decorator)
+
+
+### Class Decorator
+[Example use](http://blogs.msdn.com/b/typescript/archive/2015/04/30/announcing-typescript-1-5-beta.aspx): Using the metadata api to store information on a class.
+
+No parameters:
+```ts
+function ClassDecorator(
+    target: Function // The class the decorator is declared on
+    ) {
+    console.log("ClassDecorator called on: ", target);
+}
+
+@ClassDecorator
+class ClassDecoratorExample {
+}
+```
+    ClassDecorator called on:  function ClassDecoratorExample() {
+     }
+[[playground][1]]
+
+With parameters:
+```ts
+function ClassDecoratorParams(param1: number, param2: string) {
+    return function(
+        target: Function // The class the decorator is declared on
+        ) {
+        console.log("ClassDecoratorParams(" + param1 + ", '" + param2 + "') called on: ", target);
+    }
+}
+
+@ClassDecoratorParams(1, "a")
+@ClassDecoratorParams(2, "b")
+class ClassDecoratorParamsExample {
+}
+```
+    ClassDecoratorParams(2, 'b') called on:  function ClassDecoratorParamsExample() {
+     }
+    ClassDecoratorParams(1, 'a') called on:  function ClassDecoratorParamsExample() {
+     }
+[[playground][2]]
+
+
+### Property Decorator
+[Example use](http://stackoverflow.com/a/29706811/188246): Creating a @serialize("serializedName")
+decorator and adding the property name the a list of properties to serialize.
+```ts
+function PropertyDecorator(
+    target: Object, // The prototype of the class
+    propertyKey: string | symbol // The name of the property
+    ) {
+    console.log("PropertyDecorator called on: ", target, propertyKey);
+}
+
+class PropertyDecoratorExample {
+    @PropertyDecorator
+    name: string;
+}
+```
+    PropertyDecorator called on:  {} name
+[[playground][3]]
+
+
+### Method Decorator
+```ts
+function MethodDecorator(
+    target: Object, // The prototype of the class
+    propertyKey: string, // The name of the method
+    descriptor: TypedPropertyDescriptor<any>
+    ) {
+    console.log("MethodDecorator called on: ", target, propertyKey, descriptor);
+}
+
+class MethodDecoratorExample {
+    @MethodDecorator
+    method() {
+    }
+}
+```
+    MethodDecorator called on:  { method: [Function] } method { value: [Function],
+      writable: true,
+      enumerable: true,
+      configurable: true }
+[[playground][4]]
+
+
+Restrict to a certain function signature:
+```ts
+function TypeRestrictedMethodDecorator(
+    target: Object, // The prototype of the class
+    propertyKey: string, // The name of the method
+    descriptor: TypedPropertyDescriptor<(num: number) => number>
+    ) {
+    console.log("TypeRestrictedMethodDecorator called on: ", target, propertyKey, descriptor);
+}
+
+class TypeRestrictedMethodDecoratorExample {
+    @TypeRestrictedMethodDecorator
+    method(num: number): number {
+        return 0;
+    }
+}
+```
+    TypeRestrictedMethodDecorator called on:  { method: [Function] } method { value: [Function],
+      writable: true,
+      enumerable: true,
+      configurable: true }
+[[playground][5]]
+
+
+### Static Method Decorator
+```ts
+function StaticMethodDecorator(
+    target: Function, // the function itself and not the prototype
+    propertyKey: string | symbol, // The name of the static method
+    descriptor: TypedPropertyDescriptor<any>
+    ) {
+    console.log("StaticMethodDecorator called on: ", target, propertyKey, descriptor);
+}
+
+class StaticMethodDecoratorExample {
+    @StaticMethodDecorator
+    static staticMethod() {
+    }
+}
+```
+    StaticMethodDecorator called on:  function StaticMethodDecoratorExample() {
+      }
+[[playground][6]]
+
+
+### Parameter Decorator
+```ts
+function ParameterDecorator(
+    target: Function, // The prototype of the class
+    propertyKey: string | symbol, // The name of the method
+    parameterIndex: number // The index of parameter in the list of the function's parameters
+    ) {
+    console.log("ParameterDecorator called on: ", target, propertyKey, parameterIndex);
+}
+
+class ParameterDecoratorExample {
+    method(@ParameterDecorator param1: string, @ParameterDecorator param2: number) {
+    }
+}
+```
+    ParameterDecorator called on:  { method: [Function] } method 1
+    ParameterDecorator called on:  { method: [Function] } method 0
+[[playground][7]]
+
+
+
 ## figures
 ![ ](https://svbtleusercontent.com/pxffvvbj2iho8w_small.jpg)
 
@@ -133,3 +290,4 @@ The has an opportunity to intercede before the relevant `defineProperty` actuall
 * http://blog.wolksoftware.com/decorators-metadata-reflection-in-typescript-from-novice-to-expert-part-4
 * https://www.npmjs.com/package/reflect-annotations
 * https://stackoverflow.com/questions/38085883/how-to-create-a-simple-typescript-metadata-annotation
+* http://stackoverflow.com/a/29837695/40877
