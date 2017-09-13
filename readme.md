@@ -63,6 +63,8 @@ A decorator is:
 * that takes the target, name, and decorator descriptor as arguments
 * and optionally returns a decorator descriptor to install on the target object
 
+Decorators use the form @expression, where expression must evaluate to a function that will be called at runtime with information about the decorated declaration.
+
 Consider a simple class definition:
 
 ```js
@@ -113,6 +115,44 @@ function defineDecoratedProperty(target, { initializer, enumerable, configurable
 ```
 
 The has an opportunity to intercede before the relevant `defineProperty` actually occurs.
+
+#### Decorator Factories
+
+If we want to customize how a decorator is applied to a declaration, we can write a decorator factory. A Decorator Factory is simply a function that returns the expression that will be called by the decorator at runtime.
+
+We can write a decorator factory in the following fashion:
+```ts
+function color(value: string) { // this is the decorator factory
+    return function (target) { // this is the decorator
+        // do something with 'target' and 'value'...
+    }
+}
+```
+
+#### Decorator Composition
+
+Multiple decorators can be applied to a declaration, as in the following examples:
+
+On a single line:
+```ts
+@f @g x
+```
+
+On multiple lines:
+```ts
+@f
+@g
+x
+```
+
+#### Decorator Evaluation
+
+There is a well defined order to how decorators applied to various declarations inside of a class are applied:
+
+1. Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each instance member.
+2. Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each static member.
+3. Parameter Decorators are applied for the constructor.
+4. Class Decorators are applied for the class.
 
 - [Class Decorator](#class-decorator)
 - [Property Decorator](#property-decorator)
@@ -305,3 +345,4 @@ Output
 * https://www.npmjs.com/package/reflect-annotations
 * https://stackoverflow.com/questions/38085883/how-to-create-a-simple-typescript-metadata-annotation
 * http://stackoverflow.com/a/29837695/40877
+* https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Reflect
